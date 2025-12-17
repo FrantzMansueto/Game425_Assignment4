@@ -2,9 +2,46 @@ Game425_Assignment4
 
 Matthew Rust
 
-Frantz Manuelto
+Frantz Mansueto
+PlayerClickToMove.cs
 
-Same Dalton
+// Responsible of moving character based on A* script
+   if (Input.GetMouseButtonDown(1))
+   {
+       Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+       if (Physics.Raycast(ray, out RaycastHit hit))
+       {
+           Debug.Log("Ray hit: " + hit.collider.name);
+
+           GridNode startNode = gridManager.WorldToNode(transform.position);
+           GridNode targetNode = gridManager.WorldToNode(hit.point);
+
+// Responsible of rotation and animation when character is allowed to move due to A* script
+    if (isMoving)
+    {
+        if (path == null || pathIndex >= path.Count)
+        {
+            isMoving = false;
+            return;
+        }
+
+        Vector3 targetPos = path[pathIndex].worldPosition;
+        targetPos.y = transform.position.y;
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+        float distanceXZ = Vector2.Distance(
+            new Vector2(transform.position.x, transform.position.z),
+            new Vector2(targetPos.x, targetPos.z)
+        );
+
+        if (distanceXZ < 0.05f)
+        {
+            pathIndex++;
+        }
+    }
+}
+
+//P.S. there was a contradiction with some script which deemed hard to solve for the script to work. But movement should work due to the fact it differentiates which object it is being hit by ray casting.
+Sam Dalton
 
 Contributions:
   Sam
