@@ -8,6 +8,7 @@ public class PlayerClickToMove : MonoBehaviour
 {
     public GridManager gridManager;
     public Pathfinder pathfinder;
+    public Animator animator;   // reference to Animator
 
     public float moveSpeed = 4f;
 
@@ -36,6 +37,8 @@ public class PlayerClickToMove : MonoBehaviour
 
                 if (path != null)
                     DebugDrawPath(path);
+                else
+                    Debug.LogError("Destination unreachable!");
             }
         }
     }
@@ -43,18 +46,34 @@ public class PlayerClickToMove : MonoBehaviour
     void FollowPath()
     {
         if (path == null || pathIndex >= path.Count)
+        {
+            animator.SetFloat("Speed", 0f); // idle
             return;
+        }
 
         Vector3 targetPos = path[pathIndex].worldPosition;
+        Vector3 dir = targetPos - transform.position;
 
-        transform.position = Vector3.MoveTowards(
-            transform.position,
-            targetPos,
-            moveSpeed * Time.deltaTime
-        );
+        if (dir.magnitude > 0.1f)
+        {
+            // Move
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPos,
+                moveSpeed * Time.deltaTime
+            );
 
-        if (Vector3.Distance(transform.position, targetPos) < 0.1f)
+            // Rotate toward direction
+            Quaternion targetRotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+
+            // Animate
+            animator.SetFloat("Speed", dir.magnitude);
+        }
+        else
+        {
             pathIndex++;
+        }
     }
 
     void DebugDrawPath(List<GridNode> path)
