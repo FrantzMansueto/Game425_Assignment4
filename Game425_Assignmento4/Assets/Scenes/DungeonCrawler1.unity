@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -37684,8 +37684,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7c0f25a69a18344958780d52a993aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 0}
-  pathfinder: {fileID: 0}
+  gridManager: {fileID: 2066160519}
+  pathfinder: {fileID: 2066160520}
+  errorAudio: {fileID: 0}
   moveSpeed: 4
 --- !u!1001 &1672231061
 PrefabInstance:
