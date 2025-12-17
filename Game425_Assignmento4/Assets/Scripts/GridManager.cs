@@ -16,8 +16,9 @@ public class GridManager : MonoBehaviour
 
     Dictionary<Vector2Int, Transform> cellLookup;
 
-    void Awake()
+    void Start()
     {
+        Debug.Log("GridManager Awake called");
         BuildCellLookup();
         BuildGrid();
     }
@@ -44,12 +45,12 @@ public class GridManager : MonoBehaviour
         
         for (int x = 0; x < width; x++)
         {
-            for (int y = 0; y < height; y++)
+            for (int z = 0; z < height; z++)
             {
                 bool walkable = false;
-                Vector3 worldPos = new Vector3(x, 0, y);
+                Vector3 worldPos = new Vector3(x, 0, z);
                 
-                Vector2Int pos = new Vector2Int(x, y);
+                Vector2Int pos = new Vector2Int(x, z);
 
                 if (cellLookup.ContainsKey(pos))
                 {
@@ -57,7 +58,7 @@ public class GridManager : MonoBehaviour
                     walkable = cell.name.Contains("Cube_White");
                 }
 
-                grid[x, y] = new GridNode(walkable, pos, worldPos);
+                grid[x, z] = new GridNode(walkable, pos, worldPos);
             }
         }
     }

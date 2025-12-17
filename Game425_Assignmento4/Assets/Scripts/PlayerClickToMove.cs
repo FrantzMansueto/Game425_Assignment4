@@ -7,7 +7,7 @@ public class PlayerClickToMove : MonoBehaviour
     public GridManager gridManager;
     public Pathfinder pathfinder;
     public AudioSource errorAudio;
-    public Animator animator;       // <-- add animator reference
+    public Animator animator;
     public float moveSpeed = 5f;
 
     private List<GridNode> path;

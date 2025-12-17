@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Pathfinder : MonoBehaviour
 {
-    public GridManager gridManager;
+    public GridManager GridManager;
 
     private GridNode[,] grid;
     private int width;
@@ -17,14 +17,14 @@ public class Pathfinder : MonoBehaviour
 
     void Start()
     {
-        grid = gridManager.grid;
-        width = gridManager.width;
-        height = gridManager.height;
+        grid = GridManager.grid;
+        width = GridManager.width;
+        height = GridManager.height;
     }
 
     public List<GridNode> FindPath(GridNode startNode, GridNode goalNode)
     {
-        gridManager.ResetNodes();
+        GridManager.ResetNodes();
 
         startNode.g = 0;
         startNode.h = Heuristic(startNode, goalNode);
