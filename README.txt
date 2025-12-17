@@ -1,6 +1,6 @@
 Game425_Assignment4
 
-Mathew Rust
+Matthew Rust
 
 Frantz Manuelto
 
