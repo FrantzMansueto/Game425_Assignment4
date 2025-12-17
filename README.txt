@@ -40,7 +40,6 @@ PlayerClickToMove.cs
     }
 }
 
-//P.S. there was a contradiction with some script which deemed hard to solve for the script to work. But movement should work due to the fact it differentiates which object it is being hit by ray casting.
 Sam Dalton
 
 Contributions:
@@ -49,3 +48,4 @@ Contributions:
 
   Matthew
   Modified PlayerClickToMove to work with animations. Added script to test and make sure the logic was working via wasd movement, transferred the logic to PlayerClickToMove and then deleted the wasd script entirely.
+   Did further bug fixing to figure out what was wrong with the player movement. Which involved various modificaitons to the GridManager script.
