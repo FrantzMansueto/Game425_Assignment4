@@ -24,7 +24,7 @@ public class PlayerClickToMove : MonoBehaviour
                 Debug.Log("Ray hit: " + hit.collider.name);
 
                 GridNode startNode = gridManager.WorldToNode(transform.position);
-                GridNode targetNode = gridManager.WorldToNode(hit.point);
+                GridNode targetNode = gridManager.WorldToNode(hit.transform.position);
 
                 if (!targetNode.walkable)
                 {

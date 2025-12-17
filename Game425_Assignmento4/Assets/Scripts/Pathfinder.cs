@@ -101,7 +101,9 @@ public class Pathfinder : MonoBehaviour
 
             if (x >= 0 && x < width && y >= 0 && y < height)
                 neighbors.Add(grid[x, y]);
+            Debug.Log($"Node[{node.gridPos}] has neighbor {x},{y}, walkable={grid[x,y].walkable}");
         }
+        
 
         return neighbors;
     }

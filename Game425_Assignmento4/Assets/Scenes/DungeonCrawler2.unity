@@ -33875,7 +33875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7c0f25a69a18344958780d52a993aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridManager: {fileID: 0}
+  gridManager: {fileID: 914542769}
   pathfinder: {fileID: 914542768}
   errorAudio: {fileID: 0}
   animator: {fileID: 1836015275}

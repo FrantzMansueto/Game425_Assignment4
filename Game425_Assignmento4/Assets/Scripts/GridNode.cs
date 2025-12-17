@@ -17,14 +17,16 @@ public class GridNode
     public float f;
     public GridNode parent;
 
-    public GridNode(bool walkable, Vector2Int gridPos, Vector3 worldPosition)
+    public GridNode(Vector2Int gridPos, Vector3 worldPosition, bool walkable)
     {
-        this.walkable = walkable;
         this.gridPos = gridPos;
         this.worldPosition = worldPosition;
-        g = float.MaxValue; // was g = 0;
+        this.walkable = walkable;
+        g = float.MaxValue;
         h = 0;
         f = 0;
         parent = null;
     }
+
+
 }
