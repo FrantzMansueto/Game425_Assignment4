@@ -7,6 +7,7 @@ public class PlayerClickToMove : MonoBehaviour
     public GridManager gridManager;
     public Pathfinder pathfinder;
     public AudioSource errorAudio;
+    public Animator animator;       // <-- add animator reference
     public float moveSpeed = 5f;
 
     private List<GridNode> path;
@@ -15,7 +16,6 @@ public class PlayerClickToMove : MonoBehaviour
 
     void Update()
     {
- 
         if (Input.GetMouseButtonDown(1))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -37,7 +37,7 @@ public class PlayerClickToMove : MonoBehaviour
 
                 if (path == null || path.Count == 0)
                 {
-                    Debug.Log("Path is NULL or Empty!"); // This means A* failed
+                    Debug.Log("Path is NULL or Empty!"); // A* failed
                     TriggerError("Unreachable!");
                 }
                 else
@@ -47,24 +47,37 @@ public class PlayerClickToMove : MonoBehaviour
                     isMoving = true;
                 }
             }
-        else
+            else
             {
                 Debug.Log("Ray hit NOTHING. Check your floor colliders!");
             }
         }
 
-   
         if (isMoving)
         {
             if (path == null || pathIndex >= path.Count)
             {
                 isMoving = false;
+                animator.SetFloat("Speed", 0f); // idle
                 return;
             }
 
             Vector3 targetPos = path[pathIndex].worldPosition;
             targetPos.y = transform.position.y;
+
+            // Direction vector
+            Vector3 dir = targetPos - transform.position;
+
+            // Move
             transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            if (dir.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(dir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+            }
+            animator.SetFloat("Speed", dir.magnitude);
+
+            // Check if reached this node
             float distanceXZ = Vector2.Distance(
                 new Vector2(transform.position.x, transform.position.z),
                 new Vector2(targetPos.x, targetPos.z)
@@ -74,6 +87,10 @@ public class PlayerClickToMove : MonoBehaviour
             {
                 pathIndex++;
             }
+        }
+        else
+        {
+            animator.SetFloat("Speed", 0f);
         }
     }
 
