@@ -4,7 +4,8 @@ using UnityEngine;
 
 // The result of Research, ChatGPT, and experimenting.
 
-public class GridNode : MonoBehaviour
+// Removed Monobehavior part because it was causing issues. - Matthew
+public class GridNode
 {
     public bool walkable;
     public Vector2Int gridPos;
