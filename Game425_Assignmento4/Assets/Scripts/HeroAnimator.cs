@@ -24,13 +24,11 @@ public class HeroAnimator : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
 
             // Animator parameters
-            animator.SetBool("IsMoving", true);
             animator.SetFloat("Speed", moveDirection.magnitude);
         }
         else
         {
             // Idle
-            animator.SetBool("IsMoving", false);
             animator.SetFloat("Speed", 0f);
         }
     }
